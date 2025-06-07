@@ -1,6 +1,8 @@
 package com.prueba.tecnica.nttdata.gestion_employee.service.impl;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.prueba.tecnica.nttdata.gestion_employee.model.CEmployee;
 import com.prueba.tecnica.nttdata.gestion_employee.model.COffice;
@@ -36,6 +38,11 @@ public class CEmployeeImpl implements IEmployeeService{
 
     @Override
     public Map<String, String> create(EmployeeRequestDto employee) {
+        
+        if(repository.findByDniAndAndIsActive(employee.dni(), true).isPresent()){
+            throw new DataIntegrityViolationException("El Personal con DNI "+employee.dni()+" Ya esta Registrado");
+        }
+
         repository.save(convertDtoToEmployee(employee));
         return Map.of("message","Personal Registrado");
     }

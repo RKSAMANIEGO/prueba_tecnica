@@ -7,4 +7,5 @@ import com.prueba.tecnica.nttdata.gestion_employee.model.CEmployee;
 public interface IEmployeeRepository extends JpaRepository<CEmployee,Integer> {
     
     Optional<CEmployee> findByIdAndIsActive(int id, boolean getIsActive);
+    Optional<CEmployee> findByDniAndAndIsActive(String dni,boolean isActive);
 }

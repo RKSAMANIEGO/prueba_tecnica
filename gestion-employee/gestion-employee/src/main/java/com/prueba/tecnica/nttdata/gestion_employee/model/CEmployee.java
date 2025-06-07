@@ -24,7 +24,7 @@ public class CEmployee {
     @Column(length = 11 , nullable=true)
     private String phone;
 
-    @Column(length = 8 , nullable = false , unique = true)
+    @Column(length = 8 , nullable = false)
     private String dni;
 
     @Column(length = 100, nullable = true)

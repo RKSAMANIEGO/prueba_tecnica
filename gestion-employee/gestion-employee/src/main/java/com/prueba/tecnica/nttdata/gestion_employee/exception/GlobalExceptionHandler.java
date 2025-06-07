@@ -1,8 +1,11 @@
 package com.prueba.tecnica.nttdata.gestion_employee.exception;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,4 +31,17 @@ public class GlobalExceptionHandler {
     ResponseEntity<Map<String,String>> illegalArgumentException(IllegalArgumentException ex){
         return new ResponseEntity<Map<String,String>>(Map.of("message",ex.getMessage()),HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    ResponseEntity<Map<String,String>> dataIntegrationViolationException(DataIntegrityViolationException ex){
+        return new ResponseEntity<Map<String,String>>(Map.of("message",ex.getMessage()),HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    ResponseEntity<Map<String,String>> usernameNotFoundException(UsernameNotFoundException ex){
+        return new ResponseEntity<Map<String,String>>(Map.of("message",ex.getMessage()),HttpStatus.NOT_FOUND);
+    }
+
+
+
 }

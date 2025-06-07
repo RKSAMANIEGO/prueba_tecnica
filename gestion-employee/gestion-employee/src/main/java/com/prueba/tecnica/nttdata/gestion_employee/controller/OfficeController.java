@@ -24,27 +24,27 @@ public class OfficeController {
     private final IOfficeService service;
 
     @GetMapping("")
-    ResponseEntity<List<OfficeResponseDto>> listAll(){
+    public ResponseEntity<List<OfficeResponseDto>> listAll(){
         return new ResponseEntity<List<OfficeResponseDto>>(service.listAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> findById(@PathVariable int id){
+    public ResponseEntity<?> findById(@PathVariable int id){
         return new ResponseEntity<OfficeResponseDto>(service.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("")
-    ResponseEntity<?> create(@RequestBody @Valid OfficeRequestDto office){
+    public ResponseEntity<?> create(@RequestBody @Valid OfficeRequestDto office){
         return new ResponseEntity<Map<String,String>>(service.create(office), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> update(@PathVariable int id, @RequestBody @Valid OfficeRequestDto office){
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody @Valid OfficeRequestDto office){
         return new ResponseEntity<Map<String,String>>(service.update(id, office), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> delete(@PathVariable int id){
+    public ResponseEntity<?> delete(@PathVariable int id){
         return new ResponseEntity<Map<String,String>>(service.delete(id), HttpStatus.OK);
     }
 }

@@ -23,28 +23,28 @@ public class EmployeeController {
     
     private final IEmployeeService service;
 
-     @GetMapping("")
-    ResponseEntity<List<EmployeeResponseDto>> listAll(){
+    @GetMapping("")
+    public ResponseEntity<List<EmployeeResponseDto>> listAll(){
         return new ResponseEntity<List<EmployeeResponseDto>>(service.listAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> findById(@PathVariable int id){
+    public ResponseEntity<?> findById(@PathVariable int id){
         return new ResponseEntity<EmployeeResponseDto>(service.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("")
-    ResponseEntity<?> create(@RequestBody @Valid EmployeeRequestDto office){
+    public ResponseEntity<?> create(@RequestBody @Valid EmployeeRequestDto office){
         return new ResponseEntity<Map<String,String>>(service.create(office), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> update(@PathVariable int id, @RequestBody @Valid EmployeeRequestDto office){
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody @Valid EmployeeRequestDto office){
         return new ResponseEntity<Map<String,String>>(service.update(id, office), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<?> delete(@PathVariable int id){
+    public ResponseEntity<?> delete(@PathVariable int id){
         return new ResponseEntity<Map<String,String>>(service.delete(id), HttpStatus.OK);
     }
 }

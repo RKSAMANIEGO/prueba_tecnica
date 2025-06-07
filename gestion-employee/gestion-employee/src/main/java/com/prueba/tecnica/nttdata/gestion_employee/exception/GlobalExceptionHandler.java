@@ -2,6 +2,8 @@ package com.prueba.tecnica.nttdata.gestion_employee.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.security.auth.login.CredentialException;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UsernameNotFoundException.class)
     ResponseEntity<Map<String,String>> usernameNotFoundException(UsernameNotFoundException ex){
+        return new ResponseEntity<Map<String,String>>(Map.of("message",ex.getMessage()),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CredentialException.class)
+    ResponseEntity<Map<String,String>> credentialException(CredentialException ex){
         return new ResponseEntity<Map<String,String>>(Map.of("message",ex.getMessage()),HttpStatus.NOT_FOUND);
     }
 

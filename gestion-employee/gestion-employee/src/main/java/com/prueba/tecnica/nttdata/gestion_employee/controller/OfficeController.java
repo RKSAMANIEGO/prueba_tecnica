@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.prueba.tecnica.nttdata.gestion_employee.model.dtos.EmployeeResponseDto;
 import com.prueba.tecnica.nttdata.gestion_employee.model.dtos.OfficeRequestDto;
 import com.prueba.tecnica.nttdata.gestion_employee.model.dtos.OfficeResponseDto;
 import com.prueba.tecnica.nttdata.gestion_employee.service.IOfficeService;
@@ -86,5 +88,23 @@ public class OfficeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable int id){
         return new ResponseEntity<Map<String,String>>(service.delete(id), HttpStatus.OK);
+    }
+
+    // list employees by office 
+    @GetMapping("/{idOffice}/employees")
+    public ResponseEntity<List<EmployeeResponseDto>> listEmployeeByOffice( @PathVariable int idOffice){
+        return new ResponseEntity<List<EmployeeResponseDto>>(service.listEmployeeByOffice(idOffice), HttpStatus.OK);
+    }
+
+    // delete employee by office
+    @DeleteMapping("/{officeId}/employee/{employeeId}")
+    public ResponseEntity<?> deleteEmployeeByOffice(@PathVariable int officeId,@PathVariable int employeeId){
+        return new ResponseEntity<Map<String,String>>(service.deleteEmployeeByOffice(officeId, employeeId), HttpStatus.OK);
+    }
+
+    // create employee by office
+    @PostMapping("/{officeId}/employee/{employeeId}")
+    public ResponseEntity<?> createEmployeeByOffice(@PathVariable int officeId, @PathVariable int employeeId){
+        return new ResponseEntity<Map<String,String>>(service.createEmployeeByOffice(officeId, employeeId), HttpStatus.CREATED);
     }
 }

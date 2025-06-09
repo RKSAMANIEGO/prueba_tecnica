@@ -1,4 +1,7 @@
 package com.prueba.tecnica.nttdata.gestion_employee.model;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.Builder.Default;
@@ -21,4 +24,8 @@ public class COffice {
     @Default
     @Column(name = "is_active")
     private Boolean isActive=true;
+
+    @ManyToMany(mappedBy = "offices")
+    @Default
+    private Set<CEmployee> employees = new HashSet<>();
 }
